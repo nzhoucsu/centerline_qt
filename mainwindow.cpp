@@ -168,6 +168,7 @@ void MainWindow::verify(double a[ROW][COL], double c[ROW][COL]){
 int MainWindow::run(double a[ROW][COL], double b[ROW][COL], double c[ROW][COL]){
     int i, j;
     double det_a = det(a);
+    QMessageBox::information(this, tr("det_a"), QString::number(det_a));
     if(det_a == 0){
         return -1;
     }
