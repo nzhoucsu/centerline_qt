@@ -43,6 +43,7 @@ private:
     int run(double a[ROW][COL], double b[ROW][COL], double c[ROW][COL]);
     double det(double a[ROW][COL]);
     void adj(double a[ROW][COL], double b[ROW][COL]);
+    void verify(double a[ROW][COL], double c[ROW][COL]);
 };
 
 #endif // MAINWINDOW_H

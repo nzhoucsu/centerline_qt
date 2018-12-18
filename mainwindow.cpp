@@ -79,8 +79,8 @@ int MainWindow::inverse(struct in_para *p){
     int i, j, line_num = 0, tmp;
     QString line;
     QStringList values;
-    QString f_name = p->path + "/" + p->fname;
-    QString fnw_name = p->path + "/" + p->f_newname;
+    QString f_name = p->path + "/" + p->fname; // "/" for Linux
+    QString fnw_name = p->path + "/" + p->f_newname; // "/" for Linux
     QFile file(f_name);
     QFile file_new(fnw_name);
     double a[ROW][COL], b[ROW][COL], c[ROW][COL];
@@ -123,6 +123,7 @@ int MainWindow::inverse(struct in_para *p){
                 p->fail_idx = p->fail_idx + QString::number(line_num) + ", ";
             }
             else{
+                verify(a, c);
                 p->succ_num ++;
                 xout<<c[0][0]<<","<<c[1][0]<<","<<c[2][0]<<","<<c[3][0]<<",";
                 xout<<c[0][1]<<","<<c[1][1]<<","<<c[2][1]<<","<<c[3][1]<<",";
@@ -135,6 +136,32 @@ int MainWindow::inverse(struct in_para *p){
     file_new.close();
     p->fail_idx = p->fail_idx.mid(0, p->fail_idx.length()-2);
     return 0;
+}
+
+
+void MainWindow::verify(double a[ROW][COL], double c[ROW][COL]){
+    int i, j, k;
+    double d[ROW][COL];
+    QString s = "";
+
+    for(i=0; i<ROW; i++){
+        for(j=0; j<COL; j++){
+            d[i][j] = 0;
+        }
+    }
+    for(i=0; i<ROW; i++){
+        for(j=0; j<COL; j++){
+            for(k=0; k<COL; k++){
+                d[i][j] += a[i][k]*c[k][j];
+            }
+        }
+    }
+
+    s = QString::number(d[0][0]) + ", " + QString::number(d[0][1]) + ", " + QString::number(d[0][2]) + ", " + QString::number(d[0][3]) + "\n";
+    s += QString::number(d[1][0]) + ", " + QString::number(d[1][1]) + ", " + QString::number(d[1][2]) + ", " + QString::number(d[1][3]) + "\n";
+    s += QString::number(d[2][0]) + ", " + QString::number(d[2][1]) + ", " + QString::number(d[2][2]) + ", " + QString::number(d[2][3]) + "\n";
+    s += QString::number(d[3][0]) + ", " + QString::number(d[3][1]) + ", " + QString::number(d[3][2]) + ", " + QString::number(d[3][3]) + "\n";
+    QMessageBox::information(this, tr("Result"), s);
 }
 
 
