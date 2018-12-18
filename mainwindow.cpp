@@ -123,7 +123,7 @@ int MainWindow::inverse(struct in_para *p){
                 p->fail_idx = p->fail_idx + QString::number(line_num) + ", ";
             }
             else{
-                verify(a, c);
+//                verify(a, c);
                 p->succ_num ++;
                 xout<<c[0][0]<<","<<c[1][0]<<","<<c[2][0]<<","<<c[3][0]<<",";
                 xout<<c[0][1]<<","<<c[1][1]<<","<<c[2][1]<<","<<c[3][1]<<",";
@@ -161,14 +161,14 @@ void MainWindow::verify(double a[ROW][COL], double c[ROW][COL]){
     s += QString::number(d[1][0]) + ", " + QString::number(d[1][1]) + ", " + QString::number(d[1][2]) + ", " + QString::number(d[1][3]) + "\n";
     s += QString::number(d[2][0]) + ", " + QString::number(d[2][1]) + ", " + QString::number(d[2][2]) + ", " + QString::number(d[2][3]) + "\n";
     s += QString::number(d[3][0]) + ", " + QString::number(d[3][1]) + ", " + QString::number(d[3][2]) + ", " + QString::number(d[3][3]) + "\n";
-    QMessageBox::information(this, tr("Result"), s);
+    QMessageBox::information(this, tr("Result Verificaiton"), s);
 }
 
 
 int MainWindow::run(double a[ROW][COL], double b[ROW][COL], double c[ROW][COL]){
     int i, j;
     double det_a = det(a);
-    QMessageBox::information(this, tr("det_a"), QString::number(det_a));
+//    QMessageBox::information(this, tr("det_a"), QString::number(det_a));
     if(det_a == 0){
         return -1;
     }
